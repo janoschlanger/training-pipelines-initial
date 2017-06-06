@@ -45,7 +45,7 @@ app_names=`(cf curl $apps_url | jq -r '.resources[].entity.name')`
 for name in $app_names; do
     if [ "$name" != "$app_name" ]
     then
-      cf unmap-route $app_name $CF_DOMAIN --hostname $CF_HOSTNAME
-	  cf delete $app_name
+      cf unmap-route $name $CF_DOMAIN --hostname $CF_HOSTNAME
+	  cf delete $name -r -f
     fi
 done
